@@ -46,22 +46,21 @@ const inPersonUsers = [
 
 //Міняємо місцями файли
 
-/*function changeUsers() {
-    onlineUsers.forEach(onlineUser => {
-        fs.rename(path.join(__dirname, 'main', 'online', `${onlineUser.name}`), path.join(__dirname, 'main', 'inPerson', `${onlineUser.name}`), (err) => {
-            if (err) {
-                console.log(err)
-            }
-        })
-    })
-    inPersonUsers.forEach(inPersonUser => {
-        fs.rename(path.join(__dirname, 'main', 'inPerson', `${inPersonUser.name}`), path.join(__dirname, 'main', 'online', `${inPersonUser.name}`), (err) => {
-            if (err) {
-                console.log(err)
-            }
+/*function changeUsers(oldDir, newDir) {
+    fs.readdir(path.join(__dirname, 'main', oldDir), 'utf-8', (err, data) => {
+        if (err) {
+            throw err;
+        }
+        data.forEach(file => {
+            fs.rename(path.join(__dirname, 'main', oldDir, file), path.join(__dirname, 'main', newDir, file), (err) => {
+                if (err) {
+                    throw err;
+                }
+            })
         })
     })
 }
 
-changeUsers();*/
+changeUsers("inPerson", "online");
+changeUsers("online", "inPerson");*/
 
