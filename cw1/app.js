@@ -93,6 +93,7 @@ function renameOrClear({folder}) {
                             renameOrClear(folder,data[i])
                             if (err) {
                                 throw err;
+
                             }
                             //renameOrClear({folder:path.join(folder,data[i])})
                         })
