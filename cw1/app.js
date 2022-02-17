@@ -54,26 +54,31 @@ const path = require("path");
 
 //Створення папок
 
-/*fs.mkdir(path.join(__dirname, 'data', 'data2'), err => {
+/*fs.mkdir(path.join(__dirname, 'data'), err => {
     if (err) {
         throw err;
     }
-    fs.mkdir(path.join(__dirname, 'data', 'data3'), err => {
+    fs.mkdir(path.join(__dirname, 'data', 'data2'), err => {
         if (err) {
             throw err;
         }
-        fs.writeFile(path.join(__dirname, 'data', 'data2', 'info.txt'),'sun is shining',err=>{
-            if (err){
+        fs.mkdir(path.join(__dirname, 'data', 'data3'), err => {
+            if (err) {
                 throw err;
             }
-            fs.writeFile(path.join(__dirname, 'data', 'data2', 'info2.txt'),'hello world',err=>{
-                if (err){
+            fs.writeFile(path.join(__dirname, 'data', 'data2', 'info.txt'), 'sun is shining', err => {
+                if (err) {
                     throw err;
                 }
-                fs.writeFile(path.join(__dirname, 'data', 'data3', 'file.txt'),'hey everyone',err=>{
-                    if (err){
+                fs.writeFile(path.join(__dirname, 'data', 'data2', 'info2.txt'), 'hello world', err => {
+                    if (err) {
                         throw err;
                     }
+                    fs.writeFile(path.join(__dirname, 'data', 'data3', 'file.txt'), 'hey everyone', err => {
+                        if (err) {
+                            throw err;
+                        }
+                    })
                 })
             })
         })
