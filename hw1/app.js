@@ -14,27 +14,27 @@ const inPersonUsers = [
 ]
 //Створення папок із користувачами
 
-/*fs.mkdir(path.join(__dirname, 'main'), (err) => {
+/*fs.mkdir(path.join(__dirname, 'data'), (err) => {
     if (err) {
         throw err;
     }
-    fs.mkdir(path.join(__dirname, 'main', 'online'), (err) => {
+    fs.mkdir(path.join(__dirname, 'data', 'online'), (err) => {
         if (err) {
             throw err;
         }
-        fs.mkdir(path.join(__dirname, 'main', 'inPerson'), (err) => {
+        fs.mkdir(path.join(__dirname, 'data', 'inPerson'), (err) => {
             if (err) {
                 throw err;
             }
             onlineUsers.forEach(onlineUser => {
-                fs.writeFile(path.join(__dirname, 'main', 'online', `${onlineUser.name}`), `\nNAME:${onlineUser.name}\nAGE:${onlineUser.age}\nCITY: ${onlineUser.city}\n`, (err) => {
+                fs.writeFile(path.join(__dirname, 'data', 'online', `${onlineUser.name}`), `\nNAME:${onlineUser.name}\nAGE:${onlineUser.age}\nCITY: ${onlineUser.city}\n`, (err) => {
                     if (err) {
                         throw err;
                     }
                 })
             })
             inPersonUsers.forEach(inPersonUser => {
-                fs.writeFile(path.join(__dirname, 'main', 'inPerson', `${inPersonUser.name}`), `\nNAME: ${inPersonUser.name}\nAGE:${inPersonUser.age}\nCITY: ${inPersonUser.city}\n`, (err) => {
+                fs.writeFile(path.join(__dirname, 'data', 'inPerson', `${inPersonUser.name}`), `\nNAME: ${inPersonUser.name}\nAGE:${inPersonUser.age}\nCITY: ${inPersonUser.city}\n`, (err) => {
                     if (err) {
                         throw err;
                     }
@@ -47,12 +47,12 @@ const inPersonUsers = [
 //Міняємо місцями файли
 
 /*function changeUsers(oldDir, newDir) {
-    fs.readdir(path.join(__dirname, 'main', oldDir), 'utf-8', (err, data) => {
+    fs.readdir(path.join(__dirname, 'data', oldDir), 'utf-8', (err, data) => {
         if (err) {
             throw err;
         }
         data.forEach(file => {
-            fs.rename(path.join(__dirname, 'main', oldDir, file), path.join(__dirname, 'main', newDir, file), (err) => {
+            fs.rename(path.join(__dirname, 'data', oldDir, file), path.join(__dirname, 'data', newDir, file), (err) => {
                 if (err) {
                     throw err;
                 }
