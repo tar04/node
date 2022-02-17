@@ -53,8 +53,8 @@ const path = require("path");
 // це файли тоді вам потрібно їх очистити, але не видаляти, якщо дані - це папки, вам потрібно їх
 // перейменувати і додати до назви префікс _new
 
-/*
-fs.mkdir(path.join(__dirname, 'data', 'data2'), err => {
+
+/*fs.mkdir(path.join(__dirname, 'data', 'data2'), err => {
     if (err) {
         throw err;
     }
@@ -79,29 +79,64 @@ fs.mkdir(path.join(__dirname, 'data', 'data2'), err => {
         })
     })
 })*/
+
 function renameOrClear(directory) {
+    if (path.join(__dirname,directory)){
+        fs.readdir(path.join(__dirname, directory), (err, data) => {
+            if (err) {
+                throw err;
+            }
+            for (let i = 0; i < data.length; i++) {
+                fs.stat(path.join('data', `${data[i]}`), (err, stats) => {
+                    if (stats.isDirectory()) {
+                        fs.rename(path.join(__dirname, directory, data[i]), path.join(__dirname, directory, `_new${data[i]}`), err => {
+                            if (err) {
+                                throw err;
+                            }
+                            renameOrClear(data[i])
+                        })
+                    } else {
+                        fs.truncate(path.join(__dirname, directory, data[i]), err => {
+                            if (err) {
+                                throw err;
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }else{
+
+    }
+
+}
+
+renameOrClear('data',null)
+
+/*function renameOrClear(directory) {
+    //let directories=[directory]
     fs.readdir(path.join(__dirname, directory), (err, data) => {
         if (err) {
             throw err;
         }
-
-        function rec() {
-            data.forEach(dataElement => {
-                let item=path.join(__dirname,directory,dataElement);
-                console.log(item)
-                if (item) {
-                    fs.rename(path.join(__dirname, directory, dataElement), path.join(__dirname, `${directory}_new`), err => {
+        for (let i = 0; i < data.length; i++) {
+            fs.stat(path.join('data', `${data[i]}`), (err, stats) => {
+                if (stats.isDirectory()) {
+                    fs.rename(path.join(__dirname, directory, data[i]), path.join(__dirname, directory, `${data[i]}_new`), err => {
+                        if (err) {
+                            throw err;
+                        }
+                        renameOrClear(data[i])
+                    })
+                } else {
+                    fs.truncate(path.join(__dirname, directory, data[i]), err => {
                         if (err) {
                             throw err;
                         }
                     })
-                    console.log(1)
                 }
             })
         }
-
-        rec()
     })
-}
+}*/
 
-renameOrClear('data')
