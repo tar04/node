@@ -5,11 +5,11 @@ const path = require("path");
 // в інший файл, в вас вийде невеликий callback hell, пізніше я вам покажу
 //як можна це обійти, але поки зробіть так
 
-/*fs.writeFile(path.join(__dirname,'file.txt'),'Hello everyone!',(err)=>{
+/*fs.writeFile(path.join(__dirname,'file1.txt'),'Hello everyone!',(err)=>{
     if (err){
         throw err;
     }
-    fs.readFile(path.join(__dirname,'file.txt'),'utf-8',(err,data)=>{
+    fs.readFile(path.join(__dirname,'file1.txt'),'utf-8',(err,data)=>{
         if (err){
             throw err;
         }
@@ -20,7 +20,6 @@ const path = require("path");
         })
     })
 })*/
-
 
 //2. Створіть файл ( можете вручну ) заповніть його якимись даними
 //Прочитайте його, скопіюйте всі дані з нього і перенесіть їх в нову папку та файл в ній,
@@ -81,10 +80,9 @@ const path = require("path");
     })
 })*/
 
-
 //Основна функція
 
-function renameOrClear(directory) {
+/*function renameOrClear(directory) {
     fs.readdir(path.join(directory), (err, data) => {
         if (err) {
             throw err;
@@ -110,4 +108,4 @@ function renameOrClear(directory) {
     })
 }
 
-renameOrClear('data');
+renameOrClear('data');*/
