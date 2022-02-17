@@ -80,38 +80,39 @@ const path = require("path");
     })
 })*/
 
-function renameOrClear(directory) {
-    if (path.join(__dirname,directory)){
-        fs.readdir(path.join(__dirname, directory), (err, data) => {
+function renameOrClear({folder}) {
+    if (path.join(__dirname, folder)) {
+        fs.readdir(path.join(__dirname, folder), (err, data) => {
             if (err) {
                 throw err;
             }
             for (let i = 0; i < data.length; i++) {
                 fs.stat(path.join('data', `${data[i]}`), (err, stats) => {
                     if (stats.isDirectory()) {
-                        fs.rename(path.join(__dirname, directory, data[i]), path.join(__dirname, directory, `_new${data[i]}`), err => {
+                        fs.rename(path.join(__dirname, folder, data[i]), path.join(__dirname, folder, `_new${data[i]}`), err => {
+                            renameOrClear(folder,data[i])
                             if (err) {
                                 throw err;
                             }
-                            renameOrClear(data[i])
+                            //renameOrClear({folder:path.join(folder,data[i])})
                         })
+
                     } else {
-                        fs.truncate(path.join(__dirname, directory, data[i]), err => {
+                        fs.truncate(path.join(__dirname, folder, data[i]), err => {
                             if (err) {
                                 throw err;
                             }
                         })
                     }
+
                 })
             }
         })
-    }else{
-
     }
 
 }
 
-renameOrClear('data',null)
+renameOrClear({folder: 'data'})
 
 /*function renameOrClear(directory) {
     //let directories=[directory]
