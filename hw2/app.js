@@ -14,7 +14,6 @@ app.engine('.hbs', engine({defaultLayout: false}));
 app.set('views', path.join(__dirname, 'static'));
 
 
-
 app.get('/login', (req, res) => {
     res.render('login')
 })
