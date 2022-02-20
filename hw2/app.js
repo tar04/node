@@ -32,6 +32,7 @@ app.get('/users', (req, res) => {
         }
 
         res.render('users', {users: newUsers});
+        return;
     }
     res.render('users', {users});
 });
