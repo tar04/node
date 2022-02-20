@@ -57,7 +57,7 @@ app.get('/error', (req, res) => {
     res.render('error');
 });
 
-app.get('/deleteUser/:id', ({params:{id}}, res) => {
+app.get('/deleteUser/:id', ({params: {id}}, res) => {
     const normalId = Number(id);
     users = users.filter(user => user.id !== normalId);
     res.redirect('/users');
@@ -67,27 +67,27 @@ app.post('/signin', (req, res) => {
     const {email, password} = req.body;
 
     if (users.length) {
-        users.forEach(user => {
+        const validUser = users.some(user => ((user.email === email) && (user.password === password)));
 
-            if (((user.email === email) && (user.password === password))) {
-                res.redirect(`/users/${user.id}`);
-            }
+        if (validUser) {
+            const user = users.find(user => ((user.email === email) && (user.password === password)))
+            res.redirect(`/users/${user.id}`);
+        }
 
-        })
     }
 
     res.render('notFound');
 });
 
 app.post('/login', (req, res) => {
-    for (const user of users) {
+    const {email} = req.body
+    let foundedEmail = users.find(user => user.email === email);
 
-        if (user.email === req.body.email) {
-            res.redirect('/error');
-            return;
-        }
-
+    if (foundedEmail) {
+        res.redirect('/error');
+        return;
     }
+
     users.push({...req.body, id: users.length ? users[users.length - 1].id + 1 : 1});
     res.redirect('/users');
 });
